@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ArticleList() {
     const api_key = "25e3a37a909044bcbb827df1829388f0";
     const URL_API_APPLE = `https://newsapi.org/v2/everything?q=apple&from=2025-08-05&to=2025-08-05&sortBy=popularity&apiKey=${api_key}`
     const [posts, setPosts] = useState([]);
     const [visibleCount, setVisibleCount] = useState(5);
+
+    const navigate = useNavigate();
+
+    const handleDetailsClick = (index , post)=>{
+        navigate(`/details/${index}`, { state: { article: post } })
+    }
 
     useEffect(() => {
         fetch(URL_API_APPLE)
@@ -43,7 +50,7 @@ export default function ArticleList() {
                         <p className="text-xl text-gray-500 mb-5">
                             {post.description}
                         </p>
-                        <button
+                        <button onClick={()=>handleDetailsClick(i,post)}
                         className="absolute bottom-3 right-4 bg-[#1E293B] text-white py-2 px-3 rounded-lg block justify-self-end">
                             Details
                         </button>
