@@ -21,10 +21,17 @@ export default function DetailsArticle() {
                 Back</button>
             <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
             <img src={article.urlToImage} alt="Article" className="w-full max-h-[500px] object-cover mb-5" />
-            <p className="text-gray-500 text-sm mb-2">
-                By {article.author || "Unknown"} | {article.publishedAt}
-            </p>
-            <p className="text-lg text-gray-700">{article.description}</p>
+            <div className="flex flex-row justify-between">
+                <p className="text-gray-500 text-md mb-2">
+                    By {article.author || "Unknown"}
+                </p>
+                <p className="flex flex-row items-center text-gray-500 text-md mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-icon lucide-calendar mr-2"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /></svg>
+                    {article.publishedAt ? article.publishedAt.replace('T',' | ').replace('Z',''):""}
+                </p>
+            </div>
+
+            <p className="text-lg text-gray-700">{article.content}</p>
         </div>
     );
 }

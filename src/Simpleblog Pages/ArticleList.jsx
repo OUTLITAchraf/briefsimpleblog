@@ -9,7 +9,7 @@ export default function ArticleList() {
 
     const navigate = useNavigate();
 
-    const handleDetailsClick = (index , post)=>{
+    const handleDetailsClick = (index, post) => {
         navigate(`/details/${index}`, { state: { article: post } })
     }
 
@@ -35,7 +35,7 @@ export default function ArticleList() {
                         alt="imgPost"
                         className="w-[450px] h-[300px] object-cover"
                     />
-                    <div className="mx-10 relative">
+                    <div className="ml-10 mr-5 relative">
                         <h2 className="text-3xl font-playfair font-bold">{post.title}</h2>
                         <div className="flex justify-between my-5">
                             <p className="text-xl text-gray-800">{post.author
@@ -43,15 +43,16 @@ export default function ArticleList() {
                                     ? post.author.match(/\(([^)]+)\)/)?.[1]
                                     : post.author
                                 : 'Unknown'}</p>
-                            <p className="text-2xl text-gray-800">
+                            <p className="flex flex-row items-center text-xl text-gray-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-icon lucide-calendar mr-2"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /></svg>
                                 {post.publishedAt ? post.publishedAt.replace("T", " | ").replace("Z", "") : ""}
                             </p>
                         </div>
                         <p className="text-xl text-gray-500 mb-5">
                             {post.description}
                         </p>
-                        <button onClick={()=>handleDetailsClick(i,post)}
-                        className="absolute bottom-3 right-4 bg-[#1E293B] text-white py-2 px-3 rounded-lg block justify-self-end">
+                        <button onClick={() => handleDetailsClick(i, post)}
+                            className="absolute bottom-3 right-4 bg-[#1E293B] text-white py-2 px-3 rounded-lg block justify-self-end">
                             Details
                         </button>
                     </div>
