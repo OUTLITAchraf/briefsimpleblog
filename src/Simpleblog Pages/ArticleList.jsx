@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-
 export default function ArticleList() {
     const api_key = "25e3a37a909044bcbb827df1829388f0";
     const URL_API_APPLE = `https://newsapi.org/v2/everything?q=apple&from=2025-08-05&to=2025-08-05&sortBy=popularity&apiKey=${api_key}`
@@ -34,7 +33,7 @@ export default function ArticleList() {
                         <div className="flex justify-between my-5">
                             <p className="text-xl text-gray-800">{post.author
                                 ? post.author.includes('(')
-                                    ? post.author.match(/\(([^)]+)\)/)?.[1] // extract text inside ()
+                                    ? post.author.match(/\(([^)]+)\)/)?.[1]
                                     : post.author
                                 : 'Unknown'}</p>
                             <p className="text-2xl text-gray-800">
@@ -44,7 +43,8 @@ export default function ArticleList() {
                         <p className="text-xl text-gray-500 mb-5">
                             {post.description}
                         </p>
-                        <button className="absolute bottom-3 right-4 bg-[#1E293B] text-white py-2 px-3 rounded-lg block justify-self-end">
+                        <button
+                        className="absolute bottom-3 right-4 bg-[#1E293B] text-white py-2 px-3 rounded-lg block justify-self-end">
                             Details
                         </button>
                     </div>
