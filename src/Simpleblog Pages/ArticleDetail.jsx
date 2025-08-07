@@ -14,7 +14,7 @@ export default function DetailsArticle() {
     if (!article) return <p className="text-red-500 text-3xl">No article data found.</p>;
 
     return (
-        <div className="px-10 py-5">
+        <div className="px-10 py-5 border border-gray-800 rounded-lg">
             <button onClick={() => navigate("/")}
                 className="bg-[#1E293B] text-white py-2 pl-1 pr-3 rounded-md mb-10 flex "
             ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6" /></svg>

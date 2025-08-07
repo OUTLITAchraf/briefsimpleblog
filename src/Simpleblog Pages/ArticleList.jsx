@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import ArticleCarousel from "./ArticleCarsouel";
 
 
 export default function ArticleList() {
@@ -59,7 +60,10 @@ export default function ArticleList() {
                 </div>
             )}
 
-            <h1 className="text-4xl font-playfair font-bold mb-8">Last Articles</h1>
+            <h1 className="text-4xl font-playfair font-bold mb-8">Featured Articles</h1>
+            <ArticleCarousel articles={article} />
+
+            <h2 className="text-4xl font-playfair font-bold mb-8">Last Articles</h2>
             {/* <button onClick={clearAllArticles} className="bg-red-600 text-white px-4 py-2 rounded">
                 Clear All Articles
             </button> */}
