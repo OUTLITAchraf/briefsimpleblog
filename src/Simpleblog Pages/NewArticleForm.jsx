@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function NewArticleForm() {
     const [author, setAuthor] = useState('');
@@ -7,14 +8,14 @@ export default function NewArticleForm() {
     const [date_public, setDate_public] = useState('');
     const [content, setContent] = useState('');
     const [image, setImage] = useState(null);
-    const [list_articles, setList_articles] = useState([]);
+    const navigate = useNavigate();
 
     function handleImageChange(e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setImage(reader.result); // base64 image string
+                setImage(reader.result);
             };
             reader.readAsDataURL(file);
         }
@@ -22,14 +23,28 @@ export default function NewArticleForm() {
 
     function AddArticle(e) {
         e.preventDefault();
-        const newArticle = { author: author, title: title, description: description, date_public: date_public, content: content, img: image }
-        setList_articles([...list_articles, newArticle])
+        const newArticle = {
+            id: Date.now(),
+            author: author,
+            title: title,
+            description: description,
+            publishedAt: date_public,
+            content: content,
+            urlToImage: image
+        }
+
+        const existingArticles = JSON.parse(localStorage.getItem("userArticles")) || [];
+        const updatedArticles = [newArticle, ...existingArticles];
+        localStorage.setItem("userArticles", JSON.stringify(updatedArticles));
+
         setAuthor('');
         setTitle('');
         setDescription('');
         setDate_public('');
         setContent('');
         setImage(null);
+
+        navigate("/", { state: { success: true } });
     }
     function handlerAuthor(e) {
         setAuthor(e.target.value)
@@ -69,27 +84,16 @@ export default function NewArticleForm() {
                 </div>
                 <div className="mb-5">
                     <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900">Content</label>
-                    <textarea id="content" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" value={content} onChange={handlerContent}></textarea>
+                    <textarea id="content" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" value={content} onChange={handlerContent} required></textarea>
                 </div>
                 <div className="mb-5">
                     <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900">Image</label>
-                    <input type="file" id="image" accept="image/*" onChange={handleImageChange} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="user_avatar_help" />
+                    <input type="file" id="image" accept="image/*" onChange={handleImageChange} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" aria-describedby="user_avatar_help" required/>
                 </div>
-                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                <button type="submit"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
             </form>
         </fieldset>
 
-         {list_articles.length > 0 && (
-                <div className="mt-10">
-                    <h2 className="text-2xl font-bold mb-4">Articles:</h2>
-                    {list_articles.map((article, index) => (
-                        <div key={index} className="mb-4 border p-4 rounded-lg">
-                            <h3 className="text-xl font-semibold">{article.title}</h3>
-                            <p>{article.description}</p>
-                            {article.img && <img src={article.img} alt="Uploaded" className="mt-2 w-40 h-40 object-cover rounded-md" />}
-                        </div>
-                    ))}
-                </div>
-            )}
     </>
 }

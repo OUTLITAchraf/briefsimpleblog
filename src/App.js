@@ -4,6 +4,7 @@ import Logo from "./Simpleblog Pages/asset/Logo_SimpleBlog.png";
 import ArticleDetail from "./Simpleblog Pages/ArticleDetail";
 import NewArticleForm from "./Simpleblog Pages/NewArticleForm";
 function App() {
+
   return (
     <>
     <Router>
@@ -12,7 +13,7 @@ function App() {
         <img src={Logo} alt="logo" width={"100px"} />
         </a>
         <button className="bg-[#1E293B] text-white py-2 px-3 my-6 rounded-xl">
-          <a href="/create_article">Create Post</a>
+          <a href="/create_article">Create Article</a>
         </button>
       </nav>
       <main className="mx-20 mt-10">
