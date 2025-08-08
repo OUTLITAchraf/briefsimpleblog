@@ -63,7 +63,7 @@ export default function NewArticleForm() {
     }
 
     return <>
-        <fieldset className="border border-black rounded-md">
+        <fieldset className="border border-black rounded-md mx-3 lg:mx-0">
             <legend className="text-3xl ml-10 px-2">Create Article</legend>
             <form className="mx-10 my-5" onSubmit={AddArticle}>
                 <div className="mb-5">
